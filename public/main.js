@@ -22,7 +22,7 @@ angular.module('main', [])
 		
 	}; 
 
-	function monthData () { 
+	function monthData (callback) { 
 		var month; 
 		$http({ 
 			url: '/month', 
@@ -68,21 +68,18 @@ angular.module('main', [])
       	d3: function() { return d.promise; }
       };
   }])
-.directive('d3Bars', ['d3Service', function(d3Service) {
+.directive('d3Bars', ['d3Service', 'apiService', function(d3Service, apiService) {
 	return {
-		restrict: 'EA',
-		scope: {},
 		link: function(scope, element, attrs) {
 			d3Service.d3().then(function(d3) {
 
 
           // Browser onresize event
-          window.onresize = function() {
-          	scope.$apply();
-          };
+            window.onresize = function() {
+          		scope.$apply();
+          	};
 
           // hard-code data
-
 
           // Watch for resize event
           scope.$watch(function() {
@@ -102,6 +99,7 @@ angular.module('main', [])
 				var w = 1000 - margins.c2- margins.c3; // width
 				var h = 400 - margins.c1 - margins.c3; // height
 				var data = [3, 6, 2, 7, 5, 2, 0, 3, 8, 9, 2, 5, 9, 3, 6, 3, 6, 2, 7, 5, 2, 1, 3, 8, 9, 2, 5, 9, 2, 7];
+				debugger
 				var x = d3.scale.linear().domain([0, data.length]).range([0, w]);
 				var y = d3.scale.linear().domain([0, 10]).range([h, 0]);
 				var line = 
@@ -127,17 +125,23 @@ angular.module('main', [])
 
 function mainCtrl ($scope, apiService) {
 	var vm = this;
-
-	var func = function apiSolData () { 
+	var todaySolData = function () { 
 		apiService.todayData(function(data){ 
-			debugger
 			vm.today = data.results; 
+		});
+	}
+	var monthSolData = function () { 
+		apiService.monthData(function(data){ 
+			vm.month = data.results.map(function (x) { 
+   				return x.min_temp_fahrenheit
+			});
 		});
 	}
 
 
 	angular.extend(this,{ 
-		today: func()
+		today: todaySolData(), 
+		month: monthSolData()
 	}); 
 
 
