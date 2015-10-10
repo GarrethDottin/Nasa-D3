@@ -88,6 +88,10 @@ angular.module('main', [])
           	scope.render(scope.data);
           });
 
+          // Wait for the value to resolve then call scope.render 
+          // Use Q Service to resolve it  
+
+
 	        scope.render = function(data) {
 	            var m = [80, 80, 80, 80]; // margins
 	            var margins = {
@@ -99,7 +103,6 @@ angular.module('main', [])
 				var w = 1000 - margins.c2- margins.c3; // width
 				var h = 400 - margins.c1 - margins.c3; // height
 				var data = [3, 6, 2, 7, 5, 2, 0, 3, 8, 9, 2, 5, 9, 3, 6, 3, 6, 2, 7, 5, 2, 1, 3, 8, 9, 2, 5, 9, 2, 7];
-				debugger
 				var x = d3.scale.linear().domain([0, data.length]).range([0, w]);
 				var y = d3.scale.linear().domain([0, 10]).range([h, 0]);
 				var line = 
