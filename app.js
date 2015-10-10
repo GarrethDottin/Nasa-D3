@@ -25,7 +25,8 @@ app.get('/month', function(req, res){
 		if (error) { 
 			console.log(error);
 		}
-		res.json(body);
+		var data = JSON.parse(body);
+		res.json(data);
 
 
 	})
@@ -44,7 +45,8 @@ app.get('/sol', function(req, res) {
 app.get('/sol/:data', function(req, res) { 
 	var solDay = JSON.parse(req.params.data);
 	http('http://marsweather.ingenology.com/v1/archive/?sol=' + solDay, function(error, respone, body) { 
-		res.json(body);
+		var data = JSON.parse(body);
+		res.json(data);
 	});
 });
 
