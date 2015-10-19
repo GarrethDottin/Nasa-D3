@@ -3,15 +3,23 @@
 		<title>Simple Line Graph using SVG and d3.js</title>
 		<script src="http://mbostock.github.com/d3/d3.v2.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
+		   <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script> 
+		<script type="text/javascript" src="jquery.tipsy.js"></script>
 		<link type="text/css" rel="stylesheet" href='main.css'>
+		<link href="tipsy.css" rel="stylesheet" type="text/css" />
 		<script src="main.js"> </script> 
-		<script src="api.js"></script>s
+		<script src="service.js"></script> 
+		<script src="directive.js"></script>
 	</head>
+
 	<body ng-app= "main">
+		<div id="header"> <p> Flops of the Year<p> </div> 
+		<div id="main">
 		<div ng-controller="mainController as main">
-			{{main.today}}
-		<d3-bars id="graph" class="aGraph" style="position:absolute;top:0px;left:0; float:left;"> </d3-bars> 
-				</div>
+			<d3-scatterplot id="scatterplot"></d3-scatterplot>
+		</div>
+	</div> 
 
 	</body>
+	<link href='http://fonts.googleapis.com/css?family=Lato&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 </html>

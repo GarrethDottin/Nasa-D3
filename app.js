@@ -18,9 +18,8 @@ app.get('/', function(req, res) {
 
 app.get('/month', function(req, res){ 
 	var currentDay = moment().format('YYYY MM DD').replace(/\s+/g, '-');
-	console.log('currentDay', currentDay);
 	var startDay = currentDay.slice(0,8) + '01'; 
-	console.log('startDay', startDay);
+	
 	http('http://marsweather.ingenology.com/v1/archive/?terrestrial_date_start=' + startDay +  '&terrestrial_date_end=' + currentDay, function (error, response, body) { 
 		if (error) { 
 			console.log(error);
