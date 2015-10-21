@@ -12,7 +12,7 @@ var mainService = angular.module('d3Directives', [])
 
     		scope.render = function () {
     			var width = Math.floor(window.innerWidth * .666);
-				var	height = Math.floor(window.innerHeight * .9);
+				var	height = Math.floor(window.innerWidth * .666);
     			var defaultWidth = width || 700; 
     			var defaultHeight = height ||  500; 
 
