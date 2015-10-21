@@ -3,10 +3,22 @@ var mainService = angular.module('d3Directives', [])
 	return {
 		link: function(scope, element, attrs) {
 
+			window.onresize = function () { 
+					d3.select("svg").remove();
+					// width = Math.floor(window.innerWidth * .666);
+					// height = Math.Floor(window.innerWidth * .666);
+					scope.render();
+			}
+
     		scope.render = function () {
+    			var width = Math.floor(window.innerWidth * .666);
+				var	height = Math.floor(window.innerHeight * .9);
+    			var defaultWidth = width || 700; 
+    			var defaultHeight = height ||  500; 
+
 				var margin = {top: 20, right: 40, bottom: 20, left: 20};
-				var w = 700 - margin.left - margin.right,
-    			h = 500 - margin.top - margin.bottom;
+				var w = defaultWidth - margin.left - margin.right,
+    			h = defaultHeight - margin.top - margin.bottom;
 
 				var dataset = [
 				  [256, 60], [480, 270], [250, 150], [100, 99], [330, 285],
@@ -119,7 +131,7 @@ var mainService = angular.module('d3Directives', [])
       var scriptTag = $document[0].createElement('script');
       scriptTag.type = 'text/javascript'; 
       scriptTag.async = true;
-      scriptTag.src = 'https://mbostock.github.com/d3/d3.v2.js';
+      scriptTag.src = 'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.js';
       scriptTag.onreadystatechange = function () {
       	if (this.readyState == 'complete') onScriptLoad();
       }
